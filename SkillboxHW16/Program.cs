@@ -61,14 +61,41 @@ namespace SkillboxHW16
 
         static bool IsMultipleOfLastnumber(int number)
         {
-            string stringNumber = $"{number}";
-            return CalculeteSumOfNumbers(number) % Convert.ToInt32(stringNumber[^1]) == 0;
+            return CalculeteSumOfNumbers(number) % GetLastNumer(number) == 0;
         }
 
         static int CalculeteSumOfNumbers(int number)
         {
-            string stringNumber = $"{number}";
-            return stringNumber.Select(Convert.ToInt32).Sum();
+            int n = number;
+            int sum = 0;
+
+            do
+            {
+                sum += n % 10;
+                n = n / 10;
+
+            } while (n > 0);
+            return sum;
+        }
+
+        static int GetLastNumer(int number)
+        {
+            int n = number;
+            int count = 0;
+            bool condition = true;
+
+            do
+            {
+                condition = n % 10 != 0;
+                if (condition)
+                {
+                    n++;
+                    count++;
+                }
+
+            } while (condition);
+
+            return 10 - count;
         }
     }
 }
